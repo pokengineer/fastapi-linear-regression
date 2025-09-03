@@ -36,13 +36,11 @@ class PredictResponse(BaseModel):
 
 @app.post("/predict", response_model=PredictResponse)
 def predict(request: PredictRequest):
+    """
+    Make predictions using the trained simple linear regression model.
+    - **predictions**: List of predicted target values for the given inputs.
+    """
     X_new = np.array(request.inputs).reshape(-1, 1)
     predictions = model.predict(X_new).tolist()
+    predictions = [round(pred, 2) for pred in predictions]
     return PredictResponse(predictions=predictions)
-
-#if __name__ == "__main__":
-#    user_input = input("Enter a number: ")
-#    model = my_model()
-#    model.train_model()
-#    prediction = model.predict([[float(user_input)]]) 
-#    print(round(prediction[0],2))
