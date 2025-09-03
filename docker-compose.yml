@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  linear-model-api:
+    build: .
+    container_name: linear-model-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./linear_data.csv:/app/linear_data.csv
